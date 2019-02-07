@@ -1,0 +1,99 @@
+// Author: Vinicius Bium Donadon
+// Some mixins to help us (:
+
+// CREATE A CONTAINER
+@mixin mainContainer($widthSize: 1024px, $paddingTop: null, $paddingRight: null, $paddingBottom: null, $paddingLeft: null){
+    max-width: $widthSize;
+    padding: $paddingTop $paddingRight $paddingBottom $paddingLeft;
+
+    // Patterns
+    display: block;
+    margin: 0px auto;
+    width: 100%;
+
+    // Avoiding problems
+    @if $paddingTop == null and $paddingRight == null and $paddingBottom == null and $paddingLeft == null {
+        padding: 0px;
+
+    } @else if $paddingRight == null and $paddingBottom == null and $paddingLeft == null {
+        padding: $paddingTop;
+
+    } @else if $paddingBottom == null and $paddingLeft == null { 
+        padding: $paddingTop $paddingRight;
+
+    } @else if $paddingLeft == null {
+        padding: $paddingTop $paddingRight $paddingBottom;
+    }
+} 
+
+// CREATING A BOX 
+@mixin createBox($widthSize: 100px, $heightSize: 100px, $backgroundColor: #000000, $displayType: block){
+    width: 100%;
+    max-width: $widthSize;
+    height: $heightSize;
+    background: $backgroundColor;
+    display: $displayType;
+}
+
+// EDITING A TEXT
+@mixin fontEdit($fontFamily: Arial, $fontSize: 15px, $fontColor: #000000, $fontWeight: normal, $fontStyle: normal){
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    color: $fontColor;
+    font-weight: $fontWeight;
+    font-style: $fontStyle;
+}
+
+// POSITIONING A TEXT 
+@mixin alignText ($textAlign: left, $marginTop: null, $marginRight: null, $marginBottom: null, $marginLeft: null){
+    text-align: $textAlign;
+    margin: $marginTop $marginRight $marginBottom $marginLeft;
+
+    // Avoiding problems
+    @if $marginTop == null and $marginRight == null and $marginBottom == null and $marginLeft == null {
+        margin: 0px;
+
+    } @else if $marginRight == null and $marginBottom == null and $marginLeft == null {
+        margin: $marginTop;
+
+    } @else if $marginBottom == null and $marginLeft == null { 
+        margin: $marginTop $marginRight;
+
+    } @else if $marginLeft == null {
+        margin: $marginTop $marginRight $marginBottom;
+    }
+}
+
+// CREATING A ARROW
+@mixin cssArrow($widthSize: 15px, $heightSize: 15px, $borderWidth: 1px, $borderColor: #000000, $posArrow: 45deg){
+    // Some variables to set at $posArrow.
+    // Top: -45deg;
+    // Right: 45deg;
+    // Bottom: 135deg;
+    // Left: 225deg; 
+
+    width: $widthSize;
+    height: $heightSize;
+    border: $borderWidth solid $borderColor;
+    transform: rotate($posArrow);
+
+    // Patterns
+    content: "";
+    display: inline-block;
+    border-bottom: transparent;
+    border-left: transparent;
+}
+
+// F L E X B O X
+
+// Flexbox patterns
+@mixin fFlow($flexDirection: row, $flexWrap: nowrap){
+    flex-flow: $flexDirection $flexWrap;
+    display: flex;
+}
+
+// Center 
+@mixin fAlign ($justifyContent: flex-start, $alignItems: stretch){
+    justify-content: $justifyContent;   
+    align-items: $alignItems;
+}
